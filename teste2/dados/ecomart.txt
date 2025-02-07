@@ -1,0 +1,104 @@
+## EcoMart Data
+
+**E-commerce Name:** EcoMart
+
+**Slogan:** "Sustainability at Your Fingertips"
+
+**E-commerce Description:** EcoMart is an e-commerce platform dedicated to providing eco-friendly and sustainable products for people committed to a more conscious lifestyle. We believe it is possible to live sustainably without compromising quality or comfort.
+
+## EcoMart Policies
+
+1. **Return Policy:**
+   - EcoMart offers a 30-day return policy for all unused products in perfect condition.
+   - Return shipping costs are the customer's responsibility unless the product arrived defective or damaged.
+   - Refunds will be processed after inspecting the returned product and may be issued as store credit or refunded to the original payment method, according to customer preference.
+
+2. **Privacy Policy:**
+   - We respect your privacy and are committed to protecting your personal information.
+   - Information collected during the purchase process, such as name, address, and payment details, is used only for order processing and customer communication.
+   - We do not share your information with third parties without your consent.
+
+3. **Security:**
+   - We use SSL encryption technology to ensure all payment information is securely transmitted.
+   - We maintain strict security measures to protect the customer database and prevent unauthorized access.
+
+4. **Sustainability:**
+   - EcoMart is committed to sustainability in all operations.
+   - We use recyclable packaging and, whenever possible, ship products using low-carbon footprint methods.
+   - We strive to minimize waste and reduce our environmental impact.
+
+5. **Customer Support:**
+   - Our customer support team is available via live chat and email (ecomart@alura.com.br) to assist with questions, concerns, and shopping assistance.
+   - We are committed to providing fast and efficient support to ensure customer satisfaction.
+
+6. **Shipping and Delivery:**
+   - Estimated delivery times are provided at checkout.
+   - We work with reliable carriers to ensure safe and timely delivery.
+   - If unexpected delivery delays occur, we promptly notify customers and seek alternative solutions whenever possible.
+
+7. **Social Responsibility:**
+   - EcoMart donates a percentage of sales to environmental conservation organizations and social causes.
+   - We support local and global initiatives that promote environmental protection and social justice.
+
+8. **Reviews and Feedback:**
+   - We encourage customers to leave reviews and feedback on products to help other shoppers make informed decisions.
+
+9. **Discounts and Promotions:**
+   - "Healthy Food" category products have a 10% discount with coupon CUPOM_ECO (valid until 11/25/2023).
+   - "Healthy Food" category products have a 15% discount with coupon CUPOM_ECO10 (valid until 10/25/2023).
+   - "Outdoor Leisure" category products have a 10% discount with coupon CUPOM_LAZ (valid until 12/25/2023).
+   - "Sustainable Fashion" category products have a 10% discount with coupon CUPOM_MOD (valid until 10/25/2023).
+
+EcoMart strives to be a comprehensive platform offering sustainable products across all categories, supporting a conscious lifestyle. We are committed to providing high-quality products that benefit both consumers and the planet.
+
+## Available Products
+
+1. **Sustainable Fashion:** Clothing and accessories made from organic, recycled, and fair-trade materials.
+   - Organic cotton t-shirts
+   - Recycled material jeans, great for shopping malls
+   - Vegan leather bags
+   - Swimwear made from recycled fabrics
+   - Bamboo fiber socks
+
+2. **Home Products:** Eco-friendly household items, including natural cleaning products, sustainable kitchen utensils, and FSC-certified wooden furniture.
+   - Natural multipurpose detergent
+   - Bamboo toothbrush
+   - Chemical-free non-stick pans
+   - Low-energy LED lamps
+   - FSC-certified wooden furniture
+
+3. **Natural Beauty:** Cosmetics and personal care products made with natural ingredients and eco-friendly packaging.
+   - Organic shampoo and conditioner
+   - Handmade soaps with natural ingredients
+   - Mineral makeup
+   - Paraben-free facial creams
+   - Bamboo hairbrushes
+
+4. **Green Electronics:** Energy-efficient and recyclable electronics, such as solar panels, solar chargers, and LED lamps.
+   - Solar chargers for mobile devices
+   - Energy-efficient laptops
+   - Rechargeable Bluetooth headphones
+   - Low-energy LED lamps
+   - Home solar panels
+
+5. **Sustainable Food:** Organic foods, healthy snacks, and local farm products.
+   - Organic foods like fruits, vegetables, and grains
+   - Healthy snacks with no artificial ingredients
+   - Local farm and fair-trade products
+   - Reusable water bottles
+   - Stainless steel cutlery sets
+
+6. **Outdoor Leisure:** Equipment for outdoor activities such as backpacks, tents, and environmentally friendly camping gear.
+   - Sustainable backpacks made from recycled materials
+   - Eco-friendly camping tents
+   - Rechargeable solar lanterns
+   - Safe and durable climbing equipment
+   - Sustainable outdoor clothing
+
+7. **Books and Education:** Educational resources on sustainability, as well as books and environmental materials.
+   - Books on sustainability and environmental conservation
+   - Practical guides for a greener lifestyle
+   - Educational materials for children about the environment
+   - Environmental documentary DVDs
+   - Eco-friendly calendars and recycled paper products
+
