@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "redmine.api.key",
+  "type": "java.lang.String",
+  "description": "A description for 'redmine.api.key'"
+}]}
