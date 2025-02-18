@@ -1,0 +1,14 @@
+# Guia de Segurança Corporativa (GSC)
+Este documento contém diretrizes e boas práticas para garantir a segurança da informação dentro da empresa.
+
+1. Uso de senhas seguras:
+   - Utilize senhas com pelo menos 12 caracteres, incluindo letras, números e símbolos.
+   - Nunca compartilhe sua senha com terceiros.
+
+2. Controle de acesso:
+   - Apenas funcionários autorizados podem acessar determinados sistemas.
+   - O acesso deve ser revogado imediatamente após a saída de um colaborador.
+
+3. Políticas de e-mail:
+   - Não abra anexos ou clique em links de remetentes desconhecidos.
+   - Utilize criptografia para comunicações sensíveis.

@@ -1,0 +1,13 @@
+# Organograma da Empresa
+Representação da estrutura hierárquica da empresa.
+
+CEO: João Silva
+├── Diretor Financeiro: Maria Souza
+│   ├── Gerente de Contabilidade: Carlos Lima
+│   ├── Gerente de Tesouraria: Ana Oliveira
+├── Diretor de Tecnologia: Pedro Mendes
+│   ├── Gerente de Infraestrutura: Rafael Costa
+│   ├── Gerente de Desenvolvimento: Lucas Rocha
+└── Diretor de RH: Fernanda Martins
+    ├── Coordenador de Recrutamento: Júlia Santos
+    ├── Coordenador de Treinamento: Marcos Almeida

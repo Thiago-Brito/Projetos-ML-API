@@ -1,0 +1,16 @@
+# Gerenciamento de Contratos
+Este documento contém informações sobre os contratos ativos da empresa.
+
+Contrato 001:
+- Cliente: Empresa X
+- Início: 01/01/2024
+- Término: 31/12/2024
+- Valor: R$ 500.000,00
+- Status: Ativo
+
+Contrato 002:
+- Cliente: Empresa Y
+- Início: 15/02/2024
+- Término: 14/02/2025
+- Valor: R$ 300.000,00
+- Status: Pendente de assinatura

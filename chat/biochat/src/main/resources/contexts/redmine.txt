@@ -1,0 +1,19 @@
+# Redmine - Gestão de Projetos
+
+## Introdução
+Este documento contém informações sobre o uso do Redmine para gerenciamento de projetos, incluindo criação de tarefas, acompanhamento e relatórios.
+
+## Funcionalidades Principais
+- **Criação de Tarefas:** Permite registrar e acompanhar atividades.
+- **Acompanhamento de Projetos:** Monitora o progresso das entregas.
+- **Geração de Relatórios:** Produz estatísticas sobre o desempenho da equipe.
+
+## Procedimentos
+1. Criar um novo projeto no Redmine.
+2. Definir responsáveis e prazos.
+3. Atualizar status das tarefas regularmente.
+4. Gerar relatórios periódicos para acompanhamento.
+
+## Contato
+- Email: suporte_redmine@empresa.com
+- Telefone: (XX) XXXX-XXXX
