@@ -19,16 +19,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "SASB_PROMPT")
-public class Prompt {
+@Entity(name = "BIO_PROMPT")
+public class BioPrompt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MENSAGEM", nullable = false, columnDefinition = "CLOB")
+    @Column(name = "MENSAGEM", nullable = false, columnDefinition = "TEXT")
     private String mensagem;
 
-    @Column(name = "RESPOSTA", nullable = false, columnDefinition = "CLOB")
+    @Column(name = "RESPOSTA", nullable = false, columnDefinition = "TEXT")
     private String resposta;
 
     @Column(name = "DATA_HORA", nullable = false)

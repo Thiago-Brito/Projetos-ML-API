@@ -5,13 +5,16 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.ollama.api.OllamaModel;
 import org.springframework.ai.ollama.api.OllamaOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +25,15 @@ public class ChatService {
     private final String organograma;
     private final String redmine;
 
+    @Autowired
+    private ChatThreadService chatThreadService;
+
+    @Autowired
+    private BioPromptRepository bioPromptRepository;
+
+    @Autowired
+    private FuncionarioService funcionarioService;
+
     public ChatService(ChatModel chatModel) throws IOException {
         this.chatModel = chatModel;
         this.gsc = loadFile("contexts/gsc.txt");
@@ -30,16 +42,17 @@ public class ChatService {
         this.redmine = loadFile("contexts/redmine.txt");
     }
 
-    public String chat(String userMessage) {
+    @Transactional
+    public String chat(String userMessage, Long funcionarioId) {
         String contexto = selecionarContexto(userMessage);
-       
-
+        Funcionario funcionario = funcionarioService.buscarPorId(funcionarioId);
+        
+        System.out.println("contexto "+contexto);
+        Thread thread = chatThreadService.getOrCreateThread(funcionario);
+        String historico = getHistoricoMensagens(thread);
         String tonalidade = analisarTonalidadeComChatbot(userMessage);
-        System.out.println("tonalidade "+tonalidade);
 
         String personalidade = definirPersonalidade(tonalidade);
-        System.out.println("personalidade "+personalidade);
-        System.out.println("\n\n");
 
         String promptSistema = String.format("""
             Você é um chatbot de atendimento aos colaboradores da Compesa.
@@ -51,10 +64,13 @@ public class ChatService {
             
             # Personalidade
             %s
+
+            # Histórico de Mensagens
+            %s
     
             # Mensagem do usuário
             %s
-            """, contexto,personalidade, userMessage);
+            """, contexto,personalidade, historico, userMessage);
 
         ChatResponse response = chatModel.call(
             new Prompt(
@@ -66,8 +82,17 @@ public class ChatService {
             )
         );
         System.out.println(promptSistema);
+        String resposta = response.getResult().getOutput().getContent();
 
-        return response.getResult().getOutput().getContent();
+        chatThreadService.saveMessage(thread, userMessage, resposta);
+
+        return resposta;
+    }
+    private String getHistoricoMensagens(Thread thread) {
+        List<BioPrompt> mensagens = bioPromptRepository.findByThreadOrderByDataHoraAsc(thread);
+        return mensagens.stream()
+            .map(m -> "Usuário: " + m.getMensagem() + "\nChatbot: " + m.getResposta())
+            .collect(Collectors.joining("\n\n"));
     }
 
     private String analisarTonalidadeComChatbot(String mensagem) {

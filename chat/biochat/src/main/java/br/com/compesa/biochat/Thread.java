@@ -23,6 +23,7 @@ public class Thread {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_THREAD")
     private Long id;
 
     @Column(name = "DATA_CRIACAO", nullable = false)
