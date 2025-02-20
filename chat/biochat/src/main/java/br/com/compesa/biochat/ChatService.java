@@ -14,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,9 +26,6 @@ public class ChatService {
 
     @Autowired
     private ChatThreadService chatThreadService;
-
-    @Autowired
-    private BioPromptRepository bioPromptRepository;
 
     @Autowired
     private FuncionarioService funcionarioService;
@@ -47,9 +43,8 @@ public class ChatService {
         String contexto = selecionarContexto(userMessage);
         Funcionario funcionario = funcionarioService.buscarPorId(funcionarioId);
         
-        System.out.println("contexto "+contexto);
         Thread thread = chatThreadService.getOrCreateThread(funcionario);
-        String historico = getHistoricoMensagens(thread);
+        String historico = chatThreadService.getHistoricoMensagens(thread);
         String tonalidade = analisarTonalidadeComChatbot(userMessage);
 
         String personalidade = definirPersonalidade(tonalidade);
@@ -78,6 +73,8 @@ public class ChatService {
                 OllamaOptions.builder()
                     .model(OllamaModel.LLAMA3_1)
                     .temperature(0.7)
+                    .topK(40)
+                    .topP(0.85)
                     .build()
             )
         );
@@ -88,12 +85,7 @@ public class ChatService {
 
         return resposta;
     }
-    private String getHistoricoMensagens(Thread thread) {
-        List<BioPrompt> mensagens = bioPromptRepository.findByThreadOrderByDataHoraAsc(thread);
-        return mensagens.stream()
-            .map(m -> "Usuário: " + m.getMensagem() + "\nChatbot: " + m.getResposta())
-            .collect(Collectors.joining("\n\n"));
-    }
+   
 
     private String analisarTonalidadeComChatbot(String mensagem) {
         String promptTonalidade = String.format("""
@@ -186,7 +178,6 @@ public class ChatService {
 
         String resultado = response.getResult().getOutput().getContent().trim().toLowerCase();
         
-        System.out.println("resultado "+resultado);
         return definirContexto(resultado);
     }
 

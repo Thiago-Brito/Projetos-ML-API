@@ -1,7 +1,9 @@
 package br.com.compesa.biochat;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,15 @@ public class ChatThreadService {
         prompt.setResposta(resposta);
         prompt.setDataHora(LocalDateTime.now());
         return bioPromptRepository.save(prompt);
+    }
+
+     public String getHistoricoMensagens(Thread thread) {
+        List<BioPrompt> mensagens = bioPromptRepository.findByThreadOrderByDataHoraAsc(thread);
+        if (mensagens.size() >= 2) {
+            bioPromptRepository.delete(mensagens.get(0));
+        }
+        return mensagens.stream()
+            .map(m -> "Usuário: " + m.getMensagem() + "\nChatbot: " + m.getResposta())
+            .collect(Collectors.joining("\n\n"));
     }
 }
