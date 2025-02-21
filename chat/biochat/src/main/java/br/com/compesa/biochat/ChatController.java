@@ -21,8 +21,8 @@ public class ChatController {
         
     }
     @PostMapping()
-     public String chat(@RequestParam Long funcionarioId, @RequestBody String userMessage) {
-        return chatService.chat(userMessage, funcionarioId);
+     public String chat(@RequestParam Long funcionarioId, @RequestBody MessageDTO messageDTO) {
+        return chatService.chat(messageDTO.getUserMessage(), funcionarioId);
     }
 
     // Criar novo funcionário
