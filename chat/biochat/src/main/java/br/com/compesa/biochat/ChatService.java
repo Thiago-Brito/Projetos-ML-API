@@ -40,12 +40,13 @@ public class ChatService {
 
     @Transactional
     public String chat(String userMessage, Long funcionarioId) {
-        String contexto = selecionarContexto(userMessage);
         Funcionario funcionario = funcionarioService.buscarPorId(funcionarioId);
         
         Thread thread = chatThreadService.getOrCreateThread(funcionario);
         String historico = chatThreadService.getHistoricoMensagens(thread);
         String tonalidade = analisarTonalidadeComChatbot(userMessage);
+        
+        String contexto = selecionarContexto(userMessage, historico);
 
         String personalidade = definirPersonalidade(tonalidade);
 
@@ -153,7 +154,7 @@ public class ChatService {
     }
 
 
-    public String selecionarContexto(String mensagemUsuario) {
+    public String selecionarContexto(String mensagemUsuario,String historico) {
         String promptSistema = String.format("""
             A GSC possui quatro documentos principais que detalham diferentes aspectos da sua área de atuação:
 
@@ -162,11 +163,15 @@ public class ChatService {
             # Documento 3: organograma -> %s
             # Documento 4: redmine -> %s
 
-            Avalie o prompt do usuário e retorne o documento mais indicado para ser usado no contexto da resposta. 
-            Retorne apenas uma palavra: 'gsc' se for o Documento 1, 'contratos' se for o Documento 2, 'organograma' se for o Documento 3 e 'redmine' se for o Documento 4.
-            prompt do usuário %s 
+            Aqui está o histórico recente da conversa com o usuário:
+            %s
 
-        """, gsc, contratos, organograma, redmine, mensagemUsuario);
+            Agora, avalie tanto o histórico da conversa quanto a mensagem mais recente do usuário e retorne o documento mais indicado para ser usado no contexto da resposta. 
+            Retorne APENAS uma palavra: 'gsc' se for o Documento 1, 'contratos' se for o Documento 2, 'organograma' se for o Documento 3 e 'redmine' se for o Documento 4.
+
+            Mensagem mais recente do usuário: %s
+
+        """, gsc, contratos, organograma, redmine,historico, mensagemUsuario);
 
         ChatResponse response = chatModel.call(new Prompt(
                 promptSistema,
@@ -177,13 +182,13 @@ public class ChatService {
         ));
 
         String resultado = response.getResult().getOutput().getContent().trim().toLowerCase();
-        
+        System.out.println("resultado: "+resultado);
         return definirContexto(resultado);
     }
 
     private String definirContexto(String resultado) {
         return switch (resultado) {
-            case "contratos" -> gsc + "\n\n" + contratos;
+            case "contratos"  -> gsc + "\n\n" + contratos;
             case "organograma" -> gsc + "\n\n" + organograma;
             case "redmine" -> gsc + "\n\n" + redmine;
             default -> gsc;
