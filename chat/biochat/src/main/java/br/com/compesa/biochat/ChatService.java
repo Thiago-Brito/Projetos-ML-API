@@ -8,12 +8,14 @@ import org.springframework.ai.ollama.api.OllamaOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import reactor.core.publisher.Flux;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,8 +40,7 @@ public class ChatService {
         this.redmine = loadFile("contexts/redmine.txt");
     }
 
-    @Transactional
-    public String chat(String userMessage, Long funcionarioId) {
+    public Flux<String> chat(String userMessage, Long funcionarioId) {
         Funcionario funcionario = funcionarioService.buscarPorId(funcionarioId);
         
         Thread thread = chatThreadService.getOrCreateThread(funcionario);
@@ -68,8 +69,9 @@ public class ChatService {
             %s
             """, contexto,personalidade, historico, userMessage);
 
-        ChatResponse response = chatModel.call(
-            new Prompt(
+            AtomicReference<StringBuilder> fullResponse = new AtomicReference<>(new StringBuilder());
+
+            return chatModel.stream(new Prompt(
                 promptSistema,
                 OllamaOptions.builder()
                     .model(OllamaModel.LLAMA3_1)
@@ -77,14 +79,15 @@ public class ChatService {
                     .topK(40)
                     .topP(0.85)
                     .build()
-            )
-        );
-        System.out.println(promptSistema);
-        String resposta = response.getResult().getOutput().getContent();
-
-        chatThreadService.saveMessage(thread, userMessage, resposta);
-
-        return resposta;
+            ))
+            .map(chunk -> {
+                String content = chunk.getResult().getOutput().getContent();
+                fullResponse.get().append(content);
+                return content;
+            })
+            .doOnComplete(() -> {
+                chatThreadService.saveMessage(thread, userMessage, fullResponse.get().toString());
+            });
     }
    
 

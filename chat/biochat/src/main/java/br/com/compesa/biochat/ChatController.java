@@ -3,9 +3,14 @@ package br.com.compesa.biochat;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import reactor.core.publisher.Flux;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.http.MediaType;
 
 
 
@@ -20,8 +25,13 @@ public class ChatController {
         this.funcionarioService = funcionarioService;
         
     }
-    @PostMapping()
+    /*@PostMapping()
      public String chat(@RequestParam Long funcionarioId, @RequestBody MessageDTO messageDTO) {
+        return chatService.chat(messageDTO.getUserMessage(), funcionarioId);
+    }*/
+
+    @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> chatStreaming(@RequestBody MessageDTO messageDTO, @RequestParam Long funcionarioId) {
         return chatService.chat(messageDTO.getUserMessage(), funcionarioId);
     }
 

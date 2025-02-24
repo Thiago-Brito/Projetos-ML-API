@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 public class MessageDTO {
     private String userMessage;
+    private Long funcionarioId;
 
 }
